@@ -10,21 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.j2eeapp.commons.domain.BaseEntity;
 
-/**
- * Provides generic common implementation of GenericDao interface persistence methods.
- * Extend this abstract class to implement DAO for your specific needs.
- * 
- * @author Arthur Vin
- */
 @Transactional
-public abstract class GenericJpaDao<T, ID extends Serializable> implements GenericDao<T, ID> {
-
-	private Class<T> persistentClass;
+public abstract class GenericJpaDao<T, ID extends Serializable> implements GenericDao<T,ID>{
 	
+	private Class<T> persistentClass;
 	private EntityManager entityManager;
 	
-	public GenericJpaDao(Class<T> persistentClass) {
-		this.persistentClass = persistentClass;
+	public GenericJpaDao(Class<T> persistenceClass) {
+		this.persistentClass=persistenceClass;
 	}
 
 	protected EntityManager getEntityManager() {
@@ -36,7 +29,7 @@ public abstract class GenericJpaDao<T, ID extends Serializable> implements Gener
 		this.entityManager = entityManager;
 	}
 
-	public Class<T> getPersistentClass() {
+	protected Class<T> getPersistentClass() {
 		return persistentClass;
 	}
 	
@@ -78,5 +71,6 @@ public abstract class GenericJpaDao<T, ID extends Serializable> implements Gener
 	public void flush() {
 		getEntityManager().flush();
 	}
+	
 	
 }

@@ -1,4 +1,4 @@
-create table appuser (
+create table appuser(
 	id number,
 	firstName varchar2(30),
 	lastName varchar2(30),
